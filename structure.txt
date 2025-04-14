@@ -1,0 +1,21 @@
+grocery-app/
+├── backend/
+│   ├── node_modules/
+│   ├── config/
+│   │   └── db.js
+│   ├── routes/
+│   │   └── products.js
+│   ├── .env
+│   ├── package.json
+│   └── server.js
+└── frontend/
+    ├── node_modules/
+    ├── public/
+    ├── src/
+    │   ├── components/
+    │   │   └── Products.js
+    │   ├── App.js
+    │   ├── index.js
+    │   └── styles.css
+    ├── package.json
+    └── .env

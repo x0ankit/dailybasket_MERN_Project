@@ -5,7 +5,8 @@ import { useAppContext } from "../context/AppContext";
 
 function Navbar() {
   const [open, setOpen] = React.useState(false);
-  const {user,setUser,setshowUserLogin,navigate,setSearchQuery,searchQuery} = useAppContext();
+  const {user,setUser,setShowUserLogin,navigate,setSearchQuery,searchQuery} = useAppContext();
+
   const logout = async()=>{
     setUser(null);
     navigate('/');
@@ -50,7 +51,7 @@ function Navbar() {
           </button>
         </div>
 
-        {!user ? (<button onClick={()=> setshowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
+        {!user ? (<button onClick={()=> setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
           Login
         </button>)
         :
@@ -93,7 +94,7 @@ function Navbar() {
 
       {!user ? (<button onClick={()=>{
         setOpen(false)
-        setshowUserLogin(true);
+        setShowUserLogin(true);
       }} className="cursor-pointer px-6 py-2 mt-2 bg-primary-500 hover:bg-primary-600 transition text-white rounded-full text-sm">
           Login
         </button>):(

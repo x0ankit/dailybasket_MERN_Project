@@ -8,6 +8,7 @@ import {Toaster} from 'react-hot-toast'
 import { useAppContext } from "./context/AppContext";
 import Login from "./components/Login";
 import ProductCategory from "./pages/productCategory";
+import ProductDetails from "./pages/ProductDetails";
 
 
 const App = () => {
@@ -26,6 +27,8 @@ const App = () => {
           <Route path="/" element={<Home/>}/>
           <Route path="/products" element={<AllProducts/>}/>
           <Route path="/products/:category" element={<ProductCategory/>}/>
+          <Route path="/products/:category/:id" element={<ProductDetails/>}/>
+
         </Routes>
       </div>
       {!isSellerPath && <Footer/>}

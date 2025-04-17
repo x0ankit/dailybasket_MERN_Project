@@ -3,6 +3,8 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
+import {Toaster} from 'react-hot-toast'
+
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller")
@@ -10,6 +12,9 @@ const App = () => {
     <div>
 
       {isSellerPath ? null : <Navbar/>} 
+
+    <Toaster/>
+
       <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px"}`}>
         <Routes>
           <Route path="/" element={<Home/>}/>

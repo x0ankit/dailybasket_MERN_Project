@@ -1,14 +1,15 @@
 import React from 'react'
-import { userAppContext } from '../context/AppContext'
-import { userParams } from 'react-router-dom'
+import { useAppContext } from '../context/AppContext'
+import { useParams } from 'react-router-dom'
+import { categories } from '../assets/assets'
+import ProductCard from '../components/ProductCard'
 
 const ProductCategory = () => {
-    const {prducts} = userContext()
-    const {category} = userParams()
+    const {products} = useAppContext()
+    const {category} = useParams()
 
-    const searchCategory = category.find((item)=> item.path.toLowerCase()=== category)
-
-    const filteredProducts = Products.filter((Product)=>Product.category.toLowerCase() === category)
+    const searchCategory = categories.find((item)=> item.path.toLowerCase()=== category)
+    const filteredProducts = products.filter((product)=>product.category.toLowerCase() === category)
 
 
 
@@ -17,18 +18,18 @@ const ProductCategory = () => {
     <div className='mt-16'>
         {searchCategory && (
             <div className='flex flex-col items-end w-max'>
-                <p>{searchCategory.text.toUpperCase()}</p>
+                <p className='text-2xl font-medium' >{searchCategory.text.toUpperCase()}</p>
                 <div className="w-16 h-0.5 bg-primary rounded-full"></div>
             </div>
         )}
         {filteredProducts.length > 0 ?(
             <div className='grid grid-col-2 sm:grid-cols-3 md:grid-cols-4lg:grid-cols5 gap-3 md:gap-6 mt-6'>
                 {filteredProducts.map((product)=>(
-                    <Productcard key={product._id} product={product}/>
+                    <ProductCard key={product._id} product={product} />
                 ))}
             </div>
         ): (
-            <div className='flex items justify-center h-[60vh'>
+            <div className='flex items justify-center h-[60vh]'>
                 <p className='text-2xl font-medium text-primary'>No products found in this category. </p>
             </div>
         )}

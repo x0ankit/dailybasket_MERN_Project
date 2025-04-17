@@ -10,7 +10,7 @@ export const AppContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isSeller, setisSeller] = useState(false);
-  const [showUserLogin, setshowUserLogin] = useState(false);
+  const [showUserLogin, setShowUserLogin] = useState(false);
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
 
@@ -63,7 +63,7 @@ export const AppContextProvider = ({ children }) => {
     fetchProducts()
   },[])
 
-  const value = { navigate, user, setUser, setisSeller, isSeller,showUserLogin,setshowUserLogin,products,currency,addToCart,updateCartItems,removeFromCart,cartItems };
+  const value = { navigate, user, setUser, setisSeller, isSeller,showUserLogin,setShowUserLogin,products,currency,addToCart,updateCartItems,removeFromCart,cartItems };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

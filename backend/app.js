@@ -1,35 +1,39 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import sequelize from './config/db.js';
-import userRoutes from './routes/userRoutes.js';
+import cookieParser from "cookie-parser";
+import express from "express";
+import cors from 'cors' 
+import connectDB from "./configs/db.js";
+import 'dotenv/config'
+import userRouter from "./routes/userRoute.js";
+import sellerRouter from "./routes/sellerRoute.js";
+import connectCloudinary from "./configs/cloudinary.js";
+import productRouter from "./routes/productRoute.js";
+import cartRouter from "./routes/cartRoute.js";
 
-dotenv.config();
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const port = process.env.PORT || 4000;
 
-// Middleware
+await connectDB();
+await connectCloudinary()
+
+// Allow multiple origins
+
+const allowedOrigins = ['http://localhost:5173']
+
+// Middleware configuration
+
 app.use(express.json());
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(cookieParser());
+app.use(cors({origin: allowedOrigins, credentials:true}));
 
-// Routes
-app.use('/users', userRoutes);
 
-// Test Route
-app.get('/', (req, res) => {
-  res.render('home', { title: 'Welcome to User API' });
-});
+app.get('/',(req,res)=>{
+  res.send("API is Working");
+})
+app.use('/api/user',userRouter)
+app.use('/api/seller',sellerRouter)
+app.use('/api/product',productRouter)
+app.use('/api/cart',cartRouter)
 
-// Sync DB and Start Server
-const PORT = process.env.PORT || 3000;
-
-sequelize.sync({ alter: true }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`✅ Server running on http://localhost:${PORT}`);
-  });
-}).catch((err) => {
-  console.error('❌ DB Connection Failed:', err);
-});
+app.listen(port,()=>{
+  console.log(`Server is running on http://localhost:${port}`)
+})

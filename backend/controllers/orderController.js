@@ -19,20 +19,22 @@ export const placeOrderCOD = async (req, res) => {
     // Add Tax Charge (2%)
     amount += Math.floor(amount * 0.02);
 
-    // Create Order
-    await Order.create({
+    // Create Order and store result
+    const newOrder = await Order.create({
       userId,
       items,
       amount,
       address,
       paymentType: "COD",
-    //   isPaid: false
     });
 
-    // await newOrder.save();
-
-    res.status(201).json({ success: true, message: "Order placed successfully", order: newOrder });
-
+    res
+      .status(201)
+      .json({
+        success: true,
+        message: "Order placed successfully",
+        order: newOrder,
+      });
   } catch (error) {
     console.error("Error placing COD order:", error);
     res.status(500).json({ success: false, message: error.message });

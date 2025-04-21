@@ -83,16 +83,17 @@ const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
 
 // create line items for stripe
 
-const line_items = productData.map(()=>{
+const line_items = productData.map((item)=>{
   return {
     price_data:{
-      currency:"usd",
+      currency:"inr",
       product_data:{
-        name:items.name,
+        name:item.name,
       },
-      unit_amount: Math.floor(items.price + items.price * 0.02) * 100
+      unit_amount: Math.floor(item.price + item.price * 0.02) * 100
+      
     },
-    quantity: items.quantity,
+    quantity: item.quantity,
   }
 })
 
@@ -114,6 +115,10 @@ const session = await stripeInstance.checkout.sessions.create({
     return res.json({ success: false, message: error.message });
   }
 };
+
+
+
+
 
 
 // Get Orders by User ID : /api/order/user

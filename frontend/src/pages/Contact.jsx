@@ -39,7 +39,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <h1 className="text-3xl font-bold text-center mb-10 text-gray-800">
-        Meet Our Team
+        Meet Our Team  <span className="text-primary cursor-pointer" > DEMON_RANGERS</span>
       </h1>
       <div className="flex flex-wrap justify-center gap-6 items-stretch">
         {team.map((member, index) => (

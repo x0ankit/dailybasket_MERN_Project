@@ -1,6 +1,10 @@
 import { assets, footerLinks } from "../assets/assets";
+import { Navigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
 const Footer = () => {
+
+    const {navigate} = useAppContext()
     
     return (
         <div className="px-6 md:px-16 lg:px-24 xl:px-32 mt-24 bg-primary/10">
@@ -26,7 +30,7 @@ const Footer = () => {
                 </div>
             </div>
             <p className="py-4 text-center text-sm md:text-base text-gray-500/80">
-                Copyright {new Date().getFullYear()} © <span className="text-primary" >DEMON_RANGERS</span> All Right Reserved.
+                Copyright {new Date().getFullYear()} © <span onClick={()=>{navigate('/contact')}} className="text-primary cursor-pointer" >DEMON_RANGERS</span> All Right Reserved.
             </p>
         </div>
     );

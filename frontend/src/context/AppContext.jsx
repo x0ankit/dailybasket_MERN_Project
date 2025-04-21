@@ -20,6 +20,7 @@ export const AppContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
   const [searchQuery, setSearchQuery] = useState({});
+  const [loadingUser, setLoadingUser] = useState(true);
 
   // Fetch Seller Status
 
@@ -39,18 +40,22 @@ export const AppContextProvider = ({ children }) => {
 
   // Fetch User Auth Status, User Data and Cart Items
 
-  const fetchUser = async  ()=>{
+  const fetchUser = async () => {
+    setLoadingUser(true); // Start loading
     try {
-      const {data}  = await axios.get('api/user/is-auth');
-      if(data.success){
-        setUser(data.user)
-        setCartItems(data.user.cartItems)
+      const { data } = await axios.get('api/user/is-auth');
+      if (data.success) {
+        setUser(data.user);
+        setCartItems(data.user.cartItems);
+      } else {
+        setUser(null);
       }
-       
     } catch (error) {
-      setUser(null)
+      setUser(null);
+    } finally {
+      setLoadingUser(false); // Done loading
     }
-  }
+  };
 
 
 
@@ -169,7 +174,7 @@ export const AppContextProvider = ({ children }) => {
 
 
 
-  const value = { navigate, user, setUser, setIsSeller, isSeller,showUserLogin,setShowUserLogin,products,currency,addToCart,updateCartItems,removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount, axios,fetchProducts,setCartItems};
+  const value = { navigate, user, setUser, setIsSeller, isSeller,showUserLogin,setShowUserLogin,products,currency,addToCart,updateCartItems,removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount, axios,fetchProducts,setCartItems,loadingUser};
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

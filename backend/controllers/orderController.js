@@ -5,6 +5,7 @@ import Product from "../models/Product.js";
 export const placeOrderCOD = async (req, res) => {
   try {
     const { userId, items, address } = req.body;
+    
 
     if (!address || items.length === 0) {
       return res.json({ success: false, message: "Invalid data" });
@@ -45,6 +46,7 @@ export const placeOrderCOD = async (req, res) => {
 // Get Orders by User ID : /api/order/user
 
 export const getUserOrders = async (req, res) => {
+ 
     try {
       const { userId } = req.body;
       const orders = await Order.find({
@@ -53,6 +55,8 @@ export const getUserOrders = async (req, res) => {
       })
       .populate("items.product address")
       .sort({ createdAt: -1 });
+
+      
   
       res.json({ success: true, orders });
     } catch (error) {

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { dummyProducts } from "../assets/assets";
+
 import toast from "react-hot-toast";
 import axios from 'axios';
 
@@ -72,17 +72,24 @@ export const AppContextProvider = ({ children }) => {
 
   // Add Product to Cart
 
-  const addToCart=(itemId)=>{
-    let cartData = structuredClone(cartItems);
-
-    if(cartData[itemId]){
-      cartData[itemId]+=1;
-    }else{
-      cartData[itemId]=1;
+  const addToCart = (itemId) => {
+    if (!user) {
+      toast("Please login to add items to cart", { icon: "🔒" });
+      navigate("/login");
+      return;
     }
+  
+    let cartData = structuredClone(cartItems);
+  
+    if (cartData[itemId]) {
+      cartData[itemId] += 1;
+    } else {
+      cartData[itemId] = 1;
+    }
+  
     setCartItems(cartData);
-    toast.success("Added to Cart")
-  }
+    toast.success("Added to Cart");
+  };
   
 
   // Update Cart Item to Quantity
@@ -158,6 +165,8 @@ export const AppContextProvider = ({ children }) => {
 
     
   },[cartItems])
+
+
 
 
   const value = { navigate, user, setUser, setIsSeller, isSeller,showUserLogin,setShowUserLogin,products,currency,addToCart,updateCartItems,removeFromCart,cartItems,searchQuery,setSearchQuery,getCartAmount,getCartCount, axios,fetchProducts,setCartItems};

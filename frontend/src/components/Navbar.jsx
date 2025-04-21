@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {assets} from '../assets/assets'
 import { useAppContext } from "../context/AppContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
+
 function Navbar() {
   const [open, setOpen] = React.useState(false);
   const {user,setUser,setShowUserLogin,navigate,setSearchQuery,searchQuery,getCartCount} = useAppContext();
+  
 
   const logout = async()=>{
 
@@ -34,7 +37,7 @@ function Navbar() {
     }
   },[searchQuery])
   return (
-    <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
+    <nav className="z-50 flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
       <NavLink to='/' onClick={()=>setOpen(false)}>
         <img
           className="h-9"
@@ -47,7 +50,7 @@ function Navbar() {
       <div className="hidden sm:flex items-center gap-8">
         <NavLink to='/'>Home</NavLink> 
         <NavLink to='/products'>All Product</NavLink> 
-        <NavLink to='/'>Contact</NavLink> 
+        <NavLink to='/contact'>Contact</NavLink> 
 
 
         <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
@@ -119,15 +122,15 @@ function Navbar() {
         {user &&
         <NavLink to='/' onClick={()=>setOpen(false)} >My Orders</NavLink>
       }
-        <NavLink to='/' onClick={()=>setOpen(false)} >Contact</NavLink>
+        <NavLink to='/contact' onClick={()=>setOpen(false)} >Contact</NavLink>
 
       {!user ? (<button onClick={()=>{
         setOpen(false)
         setShowUserLogin(true);
-      }} className="cursor-pointer px-6 py-2 mt-2 bg-primary-500 hover:bg-primary-600 transition text-white rounded-full text-sm">
+      }} className="cursor-pointer px-6 py-2 mt-2 bg-primary-500 hover:bg-primary transition text-white rounded-full text-sm">
           Login
         </button>):(
-          <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-primary-500 hover:bg-primary-600 transition text-white rounded-full text-sm">
+          <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-600 transition text-white rounded-full text-sm">
           Logout
         </button>)}
         

@@ -22,7 +22,7 @@ const MyOrders = () => {
         if(user){
             fetchMyOrders()
         }
-    },[])
+    },[user])
   return (
     <div className='mt-16 pb-16'>
         <div className='flex flex-col items-end w-max mb-8'>

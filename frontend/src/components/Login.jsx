@@ -15,35 +15,45 @@ function Login() {
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+  const nameRegex = /^[A-Za-z\s]+$/;
+
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
+  
     // Client-side validation
     if (!emailRegex.test(email)) {
       toast.error("Invalid email format");
       return;
     }
-
+  
     if (!passwordRegex.test(password)) {
       toast.error(
         "Password must be 8+ characters and include at least 1 letter and 1 number."
       );
       return;
     }
-
-    if (state === "register" && name.trim().length < 3) {
-      toast.error("Name must be at least 3 characters.");
-      return;
+  
+    // Only validate name during registration
+    if (state === "register") {
+      if (!nameRegex.test(name)) {
+        toast.error("Name should only contain letters.");
+        return;
+      }
+  
+      if (name.trim().length < 3) {
+        toast.error("Name must be at least 3 characters.");
+        return;
+      }
     }
-
+  
     try {
       const { data } = await axios.post(`/api/user/${state}`, {
         name,
         email,
         password,
       });
-
+  
       if (data.success) {
         toast.success("You are Logged In");
         navigate("/");
@@ -56,7 +66,6 @@ function Login() {
       toast.error(error.message);
     }
   };
-
   return (
     <div
       onClick={() => setShowUserLogin(false)}

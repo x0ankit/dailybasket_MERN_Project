@@ -1,33 +1,34 @@
 import React from "react";
 import TeamCard from "../components/TeamCard";
+import manImage from '../assets/man.png'
 
 const team = [
   {
-    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    image: manImage,
     name: "Raj Kumar",
     role: "Content Creator",
     bio: "Lorem Ipsum is simply dummy text of the printing"
   },
   {
-    image: "https://randomuser.me/api/portraits/men/76.jpg",
+    image: manImage,
     name: "Divyanshu Vats",
     role: "Content Writer",
     bio: "Lorem Ipsum is simply dummy text of the printing"
   },
   {
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: manImage,
     name: "Adarsh Chand",
     role: "Content Marketing",
     bio: "Lorem Ipsum is simply dummy text of the printing"
   },
   {
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: manImage,
     name: "Saurav Raj",
     role: "Content Marketing",
     bio: "Lorem Ipsum is simply dummy text of the printing"
   },
   {
-    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    image: manImage,
     name: "Ankit Raj",
     role: "Content Marketing",
     bio: "Lorem Ipsum is simply dummy text of the printing"

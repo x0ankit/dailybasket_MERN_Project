@@ -120,17 +120,17 @@ function Navbar() {
         <NavLink to='/' onClick={()=>setOpen(false)} >Home</NavLink>
         <NavLink to='/products' onClick={()=>setOpen(false)} >All Products</NavLink>
         {user &&
-        <NavLink to='/' onClick={()=>setOpen(false)} >My Orders</NavLink>
+        <NavLink to='/my-orders' onClick={()=>setOpen(false)} >My Orders</NavLink>
       }
         <NavLink to='/contact' onClick={()=>setOpen(false)} >Contact</NavLink>
 
       {!user ? (<button onClick={()=>{
         setOpen(false)
         setShowUserLogin(true);
-      }} className="cursor-pointer px-6 py-2 mt-2 bg-primary-500 hover:bg-primary transition text-white rounded-full text-sm">
+      }} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
           Login
         </button>):(
-          <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-600 transition text-white rounded-full text-sm">
+          <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-primary hover:bg-primary-dull transition text-white rounded-full text-sm">
           Logout
         </button>)}
         
